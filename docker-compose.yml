@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+  keycloak:
+    container_name: local_keycloak
+    image: quay.io/keycloak/keycloak:${KEYCLOAK_VERSION}
+    environment:
+      KC_LOG_LEVEL: "INFO"
+
+      KC_DB: "postgres"
+      KC_DB_URL_HOST: "postgres"
+      KC_DB_USERNAME: "${POSTGRESQL_USER}"
+      KC_DB_PASSWORD: "${POSTGRESQL_PASS}"
+
+      KEYCLOAK_ADMIN: "${KEYCLOAK_ADMIN}"
+      KEYCLOAK_ADMIN_PASSWORD: "${KEYCLOAK_ADMIN_PASSWORD}"
+      
+    command: start-dev
+    # command: start --optimized
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - local-keycloak
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15.6
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRESQL_USER}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASS}
+    networks:
+      - local-keycloak
+    ports:
+      - "5432:5432"
+
+    volumes:  
+    - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+  
+networks:
+  local-keycloak:
