@@ -16,7 +16,7 @@ services:
       KEYCLOAK_ADMIN_PASSWORD: "${KEYCLOAK_ADMIN_PASSWORD}"
       
     command: start-dev
-    # command: start --optimized
+
     ports:
       - "8080:8080"
     restart: unless-stopped

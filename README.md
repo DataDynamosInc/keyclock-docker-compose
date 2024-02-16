@@ -54,4 +54,4 @@ This repository is licensed under the [MIT License](LICENSE).
 
 ---
 
-This generated README provides basic instructions for setting up and using the Keycloak Docker Compose configuration available in the repository. Adjustments may be necessary based on specific deployment requirements or updates to the repository content.
+This README provides basic instructions for setting up and using the Keycloak Docker Compose configuration available in the repository. Adjustments may be necessary based on specific deployment requirements or updates to the repository content.
